@@ -10,10 +10,11 @@
 ********************************************************************************/
 
 const express = require("express");
-const app = express();
-const HTTP_PORT = process.env.PORT || 8080;
+const cors = require("cors");
 const MoviesDB = require("./modules/moviesDB.js");
+const app = express();
 const db = new MoviesDB();
+const HTTP_PORT = process.env.PORT || 8080;
 require('dotenv').config();
 //Middle:
 app.use(cors());
@@ -30,7 +31,7 @@ app.post('/api/movies', (req, res) => {
 })
 //This route must accept the numeric query parameters "page" and "perPage" as well as the (optional) string parameter "title", ie: /api/movies?page=1&perPage=5&title=The Avengers.  It will use these values to return all "Movie" objects for a specific "page" to the client as well as optionally filtering by "title", if provided (in this case, it will show both “The Avengers” films).
 app.get('/api/movies/', (req, res) => {
-    db.getAllMovies(req.query.page, req.query.perPage, PaymentRequest.query.title).then((movies) => {
+    db.getAllMovies(req.query.page, req.query.perPage, req.query.title).then((movies) => {
         res.status(200).json(movies);
     }).catch((err) => {
         res.status(204).send(err);
