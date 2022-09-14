@@ -62,7 +62,7 @@ app.delete('/api/movies/:id', (req, res) => {
     })
 })
 
-app.get('/', (res, req) => {
+app.get('/', (req, res) => {
     res.json({ message: "API Listening" });
 });
 //init
